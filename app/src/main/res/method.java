@@ -1,0 +1,1 @@
+Attempt to invoke interface method
