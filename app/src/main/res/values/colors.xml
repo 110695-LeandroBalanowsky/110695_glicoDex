@@ -8,6 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="datos_per">#2196F3</color>
-    <color name="dos_dia">#4CAF50</color>
-    <color name="dos_Corr">#DBE671</color>
+    <color name="Acc_Rap">#ffc266</color>
+    <color name="reg">#ffff66</color>
+    <color name="Acc_int">#85e085</color>
+    <color name="Lent">#668cff</color>
+    <color name="comb">#cc6600</color>
 </resources>

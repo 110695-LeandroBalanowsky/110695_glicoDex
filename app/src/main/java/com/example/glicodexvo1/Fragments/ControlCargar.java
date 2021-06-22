@@ -128,8 +128,10 @@ public class ControlCargar extends AppCompatDialogFragment implements View.OnCli
             String hora = horaDb;
             int idHorario = this.idHorario;
             String comentario = eComentario.getText().toString();
-
-            Control con = new Control(valor, fecha ,hora, idHorario, comentario, idUsuario);
+            int dosis = bd.getDosis(valor);
+            if(String.valueOf(dosis).isEmpty())
+                dosis = 0;
+            Control con = new Control(valor, fecha ,hora, idHorario, comentario,dosis, idUsuario);
             long resultante = bd.setControl(con);
 
             Toast.makeText(getContext(), "Control n°: " + resultante, Toast.LENGTH_LONG).show();

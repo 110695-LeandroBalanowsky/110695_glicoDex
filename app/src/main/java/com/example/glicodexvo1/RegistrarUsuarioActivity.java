@@ -3,10 +3,8 @@ package com.example.glicodexvo1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,7 +20,7 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registrar_usuario_activity);
+        setContentView(R.layout.activity_registrar_usuario);
         bd = AccesoBD.getInstance(getApplicationContext());
 
         etnombre= findViewById(R.id.txtNombre);

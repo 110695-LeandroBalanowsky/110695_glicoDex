@@ -84,7 +84,7 @@
             android:id="@+id/analisis"
             android:layout_width="154dp"
             android:layout_height="151dp"
-
+            android:onClick="pantalla_Analisis"
 
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
@@ -129,7 +129,7 @@
             android:id="@+id/ConteoH"
             android:layout_width="154dp"
             android:layout_height="151dp"
-
+            android:onClick="pantalla_conteo"
 
             android:layout_marginStart="24dp"
             android:layout_marginBottom="24dp"
@@ -177,7 +177,7 @@
             android:layout_width="154dp"
             android:layout_height="151dp"
             android:layout_marginEnd="24dp"
-
+            android:onClick="pantalla_Reporte"
 
             android:layout_marginBottom="24dp"
             android:foreground="?selectableItemBackground"
@@ -220,6 +220,19 @@
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="75dp"
+        android:layout_height="72dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="16dp"
+        android:backgroundTint="#00FFFFFF"
+        android:onClick="pantalla_usuario"
+        android:tint="#F9A825"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/outline_face_black_48" />
 
 </RelativeLayout>

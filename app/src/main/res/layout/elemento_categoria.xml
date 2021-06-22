@@ -2,14 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardControl"
+    android:id="@+id/cardCategoriaAlimento"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
     android:foreground="?selectableItemBackground"
 
-
-    app:cardBackgroundColor="#FFFFFF"
     app:cardElevation="6dp"
     app:cardUseCompatPadding="true"
     app:layout_columnWeight="1"
@@ -26,22 +24,6 @@
         android:id="@+id/ctrPromTotal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/lblIdCategoria"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="id"
-            android:textSize="25sp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.378"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/lblEstudio"

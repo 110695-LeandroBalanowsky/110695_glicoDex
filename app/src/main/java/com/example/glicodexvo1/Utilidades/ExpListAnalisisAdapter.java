@@ -63,10 +63,10 @@ public class ExpListAnalisisAdapter extends BaseExpandableListAdapter{
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        String tituloFecha = (String) getGroup(groupPosition);
-        convertView = LayoutInflater.from(context).inflate(R.layout.elemento_fecha_lista_analisis, null);
-        TextView fechaVista = convertView.findViewById(R.id.txtFechaAnalisisLista);
-        fechaVista.setText(tituloFecha);
+            String tituloFecha = (String) getGroup(groupPosition);
+            convertView = LayoutInflater.from(context).inflate(R.layout.elemento_fecha_lista_analisis, null);
+            TextView fechaVista = convertView.findViewById(R.id.txtFechaAnalisisLista);
+            fechaVista.setText(tituloFecha);
         return convertView;
     }
 

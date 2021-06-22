@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#80D8FF">
+    android:background="@color/datos_per">
 
     <TextView
         android:id="@+id/txtFechaAnalisisLista"
@@ -14,7 +14,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="#80D8FF"
+        android:background="@color/datos_per"
         android:text="00000"
         android:textAlignment="center"
         android:textSize="25sp"

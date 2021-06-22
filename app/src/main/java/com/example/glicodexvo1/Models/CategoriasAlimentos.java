@@ -38,17 +38,17 @@ public class CategoriasAlimentos implements Serializable {
     {
         if(idCategoria == 1)
         {
-            color = "#b5a61f";
+            color = "#e6ac00";
         }
 
         if(idCategoria == 2)
         {
-            color = "#ffb300";
+            color = "#ff944d";
         }
 
         if(idCategoria == 3)
         {
-            color = "#0c8a17";
+            color = "#70db70";
         }
 
         if(idCategoria == 4)
@@ -58,32 +58,32 @@ public class CategoriasAlimentos implements Serializable {
 
         if(idCategoria == 5)
         {
-            color = "#f200ff";
+            color = "#ff80bf";
         }
 
         if(idCategoria == 6)
         {
-            color = "#734108";
+            color = "#ff7733";
         }
 
         if(idCategoria == 7)
         {
-            color = "#9500ff";
+            color = "#d98cb3";
         }
 
         if(idCategoria == 8)
         {
-            color = "#24ced1";
+            color = "#66c2ff";
         }
 
         if(idCategoria == 9)
         {
-            color = "#ed6666";
+            color = "#ff9980";
         }
 
         if(idCategoria == 10)
         {
-            color = "#000000";
+            color = "#b2b266";
         }
 
         return color;

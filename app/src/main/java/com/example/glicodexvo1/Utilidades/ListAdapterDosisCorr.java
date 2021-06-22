@@ -1,5 +1,6 @@
 package com.example.glicodexvo1.Utilidades;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class ListAdapterDosisCorr extends RecyclerView.Adapter<RecyclerView.View
         {
             TipoInsulina tipIns = ((TipoInsulina) data.get(position));
             ((VHTipoIns) holder).tipoIns.setText(tipIns.getTipo());
+            ((VHTipoIns) holder).tipoIns.setBackgroundColor(Color.parseColor(tipIns.getColor()));
         }
         if (holder instanceof VHCorr)
         {

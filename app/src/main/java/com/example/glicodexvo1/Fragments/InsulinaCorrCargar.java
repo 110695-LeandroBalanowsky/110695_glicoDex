@@ -120,7 +120,7 @@ public class InsulinaCorrCargar extends AppCompatDialogFragment {
                 Cargar();
                 tipInsCorr.clear();
                 listaCorr.clear();
-                tipInsCorr = bd.getTiposInsulinaDosisDiaria();
+                tipInsCorr = bd.getTiposInsulinaDosisCorr();
                 InitViewsCorr();
             }
         });

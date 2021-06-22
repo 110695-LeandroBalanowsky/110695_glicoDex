@@ -61,6 +61,8 @@ public class ControlListaPrueba extends Fragment implements ControlCargar.Cargar
         elements = getListItemsMensual();
         recyclerView = vista.findViewById(R.id.idListaSemanalControles);
         mensaje= vista.findViewById(R.id.txtMensajeControl);
+        if (elements.isEmpty())
+            mensaje.setText("No hay datos para mostrar... Ingrese un nuevo control.");
 
         /*Carga del spinner*/
 
@@ -98,12 +100,17 @@ public class ControlListaPrueba extends Fragment implements ControlCargar.Cargar
 
                     }
                 }
-                mensaje.setText("");
-                listAdapter = new ListAdapterCtrl(elements);
-                recyclerView.setAdapter(listAdapter);
+                if (elements.isEmpty())
+                {
+                    mensaje.setText("No hay datos para mostrar... Ingrese un nuevo control.");
+                }
+                else
+                {
+                    mensaje.setText("");
+                    listAdapter = new ListAdapterCtrl(elements);
+                    recyclerView.setAdapter(listAdapter);
+                }
                 listAdapter.notifyDataSetChanged();
-
-
             }
 
             @Override
@@ -169,8 +176,15 @@ public class ControlListaPrueba extends Fragment implements ControlCargar.Cargar
         comboFiltro.setSelection(0);
         elements.clear();
         elements = getListItemsSemanal();
-        listAdapter = new ListAdapterCtrl(elements);
-        recyclerView.setAdapter(listAdapter);
+        if(!elements.isEmpty()) {
+            mensaje.setText("");
+            listAdapter = new ListAdapterCtrl(elements);
+            recyclerView.setAdapter(listAdapter);
+        }
+        else
+        {
+            mensaje.setText("No hay datos para mostrar... Ingrese un nuevo control.");
+        }
         listAdapter.notifyDataSetChanged();
 
     }

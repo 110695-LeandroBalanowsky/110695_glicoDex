@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.glicodexvo1.Models.CategoriasAlimentos;
@@ -59,21 +60,20 @@ public class ListAdapterCat extends RecyclerView.Adapter<ListAdapterCat.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView idCategoria, categoria;
+        private TextView  categoria;
         private ImageView flecha;
+        private CardView cardCategoria;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            idCategoria = itemView.findViewById(R.id.lblIdCategoria);
             categoria = itemView.findViewById(R.id.lblEstudio);
             flecha = itemView.findViewById(R.id.flechaCategoria);
+            cardCategoria = itemView.findViewById(R.id.cardCategoriaAlimento);
         }
 
         void binData(final CategoriasAlimentos item) {
-            idCategoria.setText(String.valueOf(item.getIdCategoria()));
             categoria.setText(item.getCategoria());
-            categoria.setTextColor(Color.parseColor(item.getColor()));
-            flecha.setColorFilter(Color.parseColor(item.getColor()));
+            cardCategoria.setCardBackgroundColor(Color.parseColor(item.getColor()));
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

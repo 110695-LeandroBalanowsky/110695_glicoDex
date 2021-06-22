@@ -9,7 +9,6 @@
     android:foreground="?selectableItemBackground"
 
 
-    app:cardBackgroundColor="#FFFFFF"
     app:cardElevation="6dp"
     app:cardUseCompatPadding="true"
     app:layout_columnWeight="1"

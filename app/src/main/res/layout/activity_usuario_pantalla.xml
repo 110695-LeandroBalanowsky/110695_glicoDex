@@ -84,7 +84,6 @@ tools:context=".UsuarioPantallaActivity">>
                             android:gravity="center_horizontal"
                             android:padding="10dp"
                             android:text="Leandro Ezequiel Balanowsky"
-                            android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
                     </TableRow>
@@ -101,7 +100,6 @@ tools:context=".UsuarioPantallaActivity">>
                             android:gravity="center_horizontal"
                             android:padding="10dp"
                             android:text="Altura:"
-                            android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -113,7 +111,6 @@ tools:context=".UsuarioPantallaActivity">>
                             android:gravity="center_horizontal"
                             android:padding="10dp"
                             android:text="163 cm"
-                            android:textColor="@color/black"
                             android:textSize="20sp" />
 
                     </TableRow>
@@ -130,7 +127,6 @@ tools:context=".UsuarioPantallaActivity">>
                             android:gravity="center_horizontal"
                             android:padding="10dp"
                             android:text="Peso:"
-                            android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -142,7 +138,6 @@ tools:context=".UsuarioPantallaActivity">>
                             android:gravity="center_horizontal"
                             android:padding="10dp"
                             android:text="95 kg"
-                            android:textColor="@color/black"
                             android:textSize="20sp" />
                     </TableRow>
                 </TableLayout>

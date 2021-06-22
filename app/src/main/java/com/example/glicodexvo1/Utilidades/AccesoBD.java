@@ -181,7 +181,7 @@ public class AccesoBD {
         values.put("Hora", control.getHora());
         values.put("Fecha", control.getFecha());
         values.put("idHorario", control.getHorario());
-        values.put("Dosis", 0);
+        values.put("Dosis", control.getDosis());
         values.put("Comentarios", control.getComentarios());
         values.put("idUsuario", control.getIdUsuario());
 

@@ -74,6 +74,7 @@ public class AnalisisActivity extends AppCompatActivity implements AnalisisCarga
         }
         adapter = new ExpListAnalisisAdapter(fechas, estudios, this);
         listaAnalisis.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
     public void Cargar_analisis(View vista)
     {
@@ -139,7 +140,6 @@ public class AnalisisActivity extends AppCompatActivity implements AnalisisCarga
         }
     }
     private void EliminarAnalisis(int groupposition, int child) {
-        //int idAnalisis = elements.get(position).getIdAnalisis();
         AnalisisEstudios analisis = (AnalisisEstudios) adapter.getChild(groupposition, child);
         android.app.AlertDialog.Builder eliminar = new android.app.AlertDialog.Builder(this);
         eliminar.setCancelable(false)
@@ -151,6 +151,7 @@ public class AnalisisActivity extends AppCompatActivity implements AnalisisCarga
                         boolean resultante = bd.elmAnalisis(analisis.getIdAnalisis());
                         if (resultante)
                             Toast.makeText(getApplicationContext(), "Analisis n°: " + resultante, Toast.LENGTH_LONG).show();
+                        adapter.notifyDataSetChanged();
                         fechas.clear();
                         RecargarLista();
                     }
@@ -185,13 +186,12 @@ public class AnalisisActivity extends AppCompatActivity implements AnalisisCarga
         anioCombo.clear();
         anioCombo= bd.getAnioAnalisis();
         adapterCombo = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item_glicodex, anioCombo );
-        cboAniosAnalisis.setAdapter(adapterCombo);
-        if(!anioCombo.isEmpty())
+        if (!anioCombo.isEmpty())
         {
+            cboAniosAnalisis.setAdapter(adapterCombo);
             fecha = cboAniosAnalisis.getSelectedItem().toString();
             fechas = bd.getFechasAnalisis(fecha);
-            CargarDatos();
         }
-
+        CargarDatos();
     }
 }
