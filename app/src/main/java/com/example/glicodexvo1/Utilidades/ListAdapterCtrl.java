@@ -1,17 +1,25 @@
 package com.example.glicodexvo1.Utilidades;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.glicodexvo1.Fragments.ControlListaPrueba;
+import com.example.glicodexvo1.Fragments.ControlModificar;
 import com.example.glicodexvo1.Models.ControlHorario;
 import com.example.glicodexvo1.R;
 
@@ -52,8 +60,7 @@ public class ListAdapterCtrl extends RecyclerView.Adapter<ListAdapterCtrl.ViewHo
 
     public void SetItems(List<ControlHorario> item){mData = item;}
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener
-    {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
         private TextView valor, fecha, hora, horario, dosis;
         CardView cardControl;
         ImageButton btnOpcCtrl;
@@ -73,13 +80,14 @@ public class ListAdapterCtrl extends RecyclerView.Adapter<ListAdapterCtrl.ViewHo
         }
 
 
-        @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 
             menu.add(this.getBindingAdapterPosition(),121, 0,"Modificar");
             menu.add(this.getBindingAdapterPosition(),122, 1,"Eliminar");
             menu.add(this.getBindingAdapterPosition(),123, 2,"Cometarios");
         }
+
+
 
     }
 

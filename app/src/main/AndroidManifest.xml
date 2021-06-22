@@ -9,13 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GlicoDexVo1">
-        <activity android:name=".ListaEstudiosActivity"></activity>
+        <activity android:name=".UsuarioPantallaActivity" />
+        <activity android:name=".TerminosActivity" />
+        <activity android:name=".FaqActivity" />
+        <activity android:name=".AnalisisActivity" />
         <activity android:name=".ReportesActivity" />
         <activity
-            android:name=".AnalisisActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".registrarUsuario_activity"
+            android:name=".RegistrarUsuarioActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
@@ -30,13 +30,13 @@
             android:name=".usuario_gral"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".categoria_activity"
+            android:name=".CategoriaActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".alimentos_activity"
+            android:name=".AlimentosActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ControlActivityPrueba"
+            android:name=".ControlActivity"
             android:screenOrientation="portrait" />
     </application>
 

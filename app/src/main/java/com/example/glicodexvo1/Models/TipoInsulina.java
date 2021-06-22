@@ -1,5 +1,7 @@
 package com.example.glicodexvo1.Models;
 
+import androidx.annotation.NonNull;
+
 public class TipoInsulina {
     private int idTipoInsulina;
     private String tipo, info;
@@ -32,5 +34,11 @@ public class TipoInsulina {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return tipo;
     }
 }

@@ -11,16 +11,25 @@ public class Control {
     private String color;
     private int idUsuario;
 
-
-    public Control(int valor, String hora, String fecha, int horario, String comentarios, int idUsuario) {
+    public Control(int valor, String fecha, String hora, int horario, String comentarios, int idUsuario) {
         this.valor = valor;
-        this.hora = hora;
         this.fecha = fecha;
+        this.hora = hora;
         this.horario = horario;
         this.comentarios = comentarios;
         this.idUsuario = idUsuario;
-        DefinirColor();
     }
+
+    public Control(int valor, String fecha, String hora, int horario, String comentarios, int dosis, int idUsuario) {
+        this.valor = valor;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.horario = horario;
+        this.comentarios = comentarios;
+        this.dosis = dosis;
+        this.idUsuario = idUsuario;
+    }
+
     public Control(int idControl, int valor, String hora, String fecha, int horario, String comentarios, int dosis, int idUsuario) {
         this.idControl = idControl;
         this.valor = valor;

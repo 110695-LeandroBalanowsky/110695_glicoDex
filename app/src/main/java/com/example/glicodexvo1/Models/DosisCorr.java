@@ -2,14 +2,31 @@ package com.example.glicodexvo1.Models;
 
 public class DosisCorr {
     private int idDosisCorr;
-    private int desde, hasta, idTipoIns, idUsuario;
+    private int desde, hasta, Dosis, idTipoIns, idUsuario;
 
-    public DosisCorr(int idDosisCorr, int desde, int hasta, int idTipoIns, int idUsuario) {
+    public DosisCorr(int idDosisCorr, int desde, int hasta, int dosis, int idTipoIns, int idUsuario) {
         this.idDosisCorr = idDosisCorr;
         this.desde = desde;
         this.hasta = hasta;
+        Dosis = dosis;
         this.idTipoIns = idTipoIns;
         this.idUsuario = idUsuario;
+    }
+
+    public DosisCorr(int desde, int hasta, int dosis, int idTipoIns, int idUsuario) {
+        this.desde = desde;
+        this.hasta = hasta;
+        Dosis = dosis;
+        this.idTipoIns = idTipoIns;
+        this.idUsuario = idUsuario;
+    }
+
+    public int getDosis() {
+        return Dosis;
+    }
+
+    public void setDosis(int dosis) {
+        Dosis = dosis;
     }
 
     public int getIdDosisCorr() {

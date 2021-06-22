@@ -129,7 +129,7 @@ public class ControlCargar extends AppCompatDialogFragment implements View.OnCli
             int idHorario = this.idHorario;
             String comentario = eComentario.getText().toString();
 
-            Control con = new Control(valor, hora, fecha, idHorario, comentario, idUsuario);
+            Control con = new Control(valor, fecha ,hora, idHorario, comentario, idUsuario);
             long resultante = bd.setControl(con);
 
             Toast.makeText(getContext(), "Control n°: " + resultante, Toast.LENGTH_LONG).show();
@@ -191,18 +191,17 @@ public class ControlCargar extends AppCompatDialogFragment implements View.OnCli
     }
     public boolean validar()
     {
+        if(eValor.getText() == null || eValor.getText().toString().trim().equals(""))
+        {
+            Toast.makeText(getContext(),"Error: el valor esta vacio",Toast.LENGTH_SHORT).show();
+            return false;
+        }
         try {
             Integer.parseInt(eValor.getText().toString());
         }
         catch (NumberFormatException E)
         {
             Toast.makeText(getContext(),"Error: el valor no es numerico",Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if(eValor.getText() == null || eValor.getText().toString().trim().equals(""))
-        {
-            Toast.makeText(getContext(),"Error: el valor esta vacio",Toast.LENGTH_SHORT).show();
             return false;
         }
         if (efecha.getText() == null || efecha.getText().toString().trim().equals(""))

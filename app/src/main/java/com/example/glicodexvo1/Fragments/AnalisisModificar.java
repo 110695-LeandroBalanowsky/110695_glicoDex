@@ -2,6 +2,7 @@ package com.example.glicodexvo1.Fragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
@@ -36,6 +38,8 @@ public class AnalisisModificar extends AppCompatDialogFragment implements View.O
     int idEstudio, idAnalisis, idUsuario;
     String fechaDB;
     Analisis an;
+    private ModificarAnalisisListener listener;
+
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -61,6 +65,7 @@ public class AnalisisModificar extends AppCompatDialogFragment implements View.O
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ModificarAnalisis();
+                        listener.RecargarLista();
                     }
                 });
 
@@ -178,6 +183,22 @@ public class AnalisisModificar extends AppCompatDialogFragment implements View.O
             }, anio, mes, dia);
 
             datePickerDialog.show();
+        }
+
+    }
+    public interface ModificarAnalisisListener {
+        void RecargarLista();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            listener = (ModificarAnalisisListener) getActivity();
+        }
+        catch (ClassCastException e)
+        {
+
         }
 
     }

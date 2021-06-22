@@ -98,6 +98,7 @@ public class ControlListaPrueba extends Fragment implements ControlCargar.Cargar
 
                     }
                 }
+                mensaje.setText("");
                 listAdapter = new ListAdapterCtrl(elements);
                 recyclerView.setAdapter(listAdapter);
                 listAdapter.notifyDataSetChanged();
@@ -128,17 +129,8 @@ public class ControlListaPrueba extends Fragment implements ControlCargar.Cargar
     /*Vistas*/
     private void InitViews()
     {
-        //titulo.setText("Ultimos 7 dias: ");
-
-        if (elements == null)
-        {
-            mensaje.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            listAdapter = new ListAdapterCtrl(elements);
-            recyclerView.setAdapter(listAdapter);
-        }
+        listAdapter = new ListAdapterCtrl(elements);
+        recyclerView.setAdapter(listAdapter);
 
     }
 

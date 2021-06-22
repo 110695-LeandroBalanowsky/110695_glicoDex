@@ -12,10 +12,15 @@ import com.example.glicodexvo1.Models.AnalisisEstudios;
 import com.example.glicodexvo1.Models.CategoriasAlimentos;
 import com.example.glicodexvo1.Models.Control;
 import com.example.glicodexvo1.Models.ControlHorario;
+import com.example.glicodexvo1.Models.DosisCorr;
+import com.example.glicodexvo1.Models.DosisCorrTipo;
+import com.example.glicodexvo1.Models.DosisDiaria;
+import com.example.glicodexvo1.Models.DosisDiariaHorario;
 import com.example.glicodexvo1.Models.Estudios;
 import com.example.glicodexvo1.Models.Horario;
 import com.example.glicodexvo1.Models.PorcentajeHiper;
 import com.example.glicodexvo1.Models.PromediosControles;
+import com.example.glicodexvo1.Models.TipoInsulina;
 import com.example.glicodexvo1.Models.Usuario;
 
 import java.util.ArrayList;
@@ -150,6 +155,22 @@ public class AccesoBD {
 
         return user;
     }
+    public boolean modUsuario(Usuario usuario)
+    {
+        boolean resultado = false;
+        Open();
+        String[] idUsuario= {String.valueOf(usuario.getIdUsuario())};
+        ContentValues values = new ContentValues();
+        values.put("Nombre", usuario.getNombre());
+        values.put("Apellido", usuario.getApellido());
+        values.put("Altura", usuario.getAltura());
+        values.put("Peso", usuario.getPeso());
+
+        db.update("Usuario", values, "idUsuario=?",idUsuario);
+        Close();
+        resultado = true;
+        return resultado;
+    }
 
     public Long setControl(Control control)
     {
@@ -206,6 +227,33 @@ public class AccesoBD {
         Open();
 
         c=db.rawQuery(sql, null);
+        while (c.moveToNext()) {
+            int idControl = c.getInt(0);
+            int valor = c.getInt(1);
+            String hora = c.getString(2);
+            String fecha = c.getString(3);
+            String horario = c.getString(4);
+            int dosis = c.getInt(5);
+            String comentarios= c.getString(6);
+            int idUsuario=c.getInt(7);
+
+            ControlHorario con = new ControlHorario(idControl, valor, hora, fecha, horario, comentarios, dosis,idUsuario);
+            resultado.add(con);
+        }
+        Close();
+
+        return resultado;
+    }
+    public ArrayList<ControlHorario> getControlesBuscar(String fec)
+    {
+        ArrayList<ControlHorario> resultado = new ArrayList<>();
+
+        Open();
+
+        c=db.rawQuery("SELECT idControl, valor, Hora, fecha, h.Horario, Dosis, Comentarios, idUsuario\n" +
+                "FROM Controles c JOIN Horarios h ON c.idHorario= h.idHorarios\n" +
+                "WHERE date(fecha) = date('"+ fec +"')\n" +
+                "ORDER BY date(fecha) DESC, time(hora) DESC", null);
         while (c.moveToNext()) {
             int idControl = c.getInt(0);
             int valor = c.getInt(1);
@@ -522,6 +570,7 @@ public class AccesoBD {
         c=db.rawQuery("SELECT DISTINCT fecha FROM Analisis\n" +
                 "WHERE strftime('%Y',fecha) = '"+ fch +"'\n" +
                 "ORDER by fecha DESC;", null);
+        //c=db.rawQuery("SELECT DISTINCT fecha FROM Analisis", null);
 
         while (c.moveToNext()) {
             String fecha = c.getString(0);
@@ -548,11 +597,11 @@ public class AccesoBD {
 
             int idAnalisis = c.getInt(0);
             String fecha = c.getString(1);
-            double valor = c.getDouble(2);;
-            String medida = c.getString(3);;
-            String estudio = c.getString(4);;
-            String observaciones = c.getString(5);;
-            int idUsuario = c.getInt(6);;
+            double valor = c.getDouble(2);
+            String medida = c.getString(3);
+            String estudio = c.getString(4);
+            String observaciones = c.getString(5);
+            int idUsuario = c.getInt(6);
 
 
 
@@ -600,6 +649,217 @@ public class AccesoBD {
 
         return resultado;
     }
+    public ArrayList<AnalisisEstudios> getAnalisisEstudiosReporte(int idEs, String anio)
+    {
+        ArrayList<AnalisisEstudios> resultado = new ArrayList<>();
 
+        Open();
+
+        c=db.rawQuery("SELECT idAnalisis, fecha, valor, medida, Tipo, Observaciones, idUsuario\n" +
+                "FROM Analisis a \n" +
+                "JOIN Estudios e \n" +
+                "ON a.idEstudio = e.idEstudios\n" +
+                "WHERE strftime('%Y',fecha) = '"+ anio +"'\n" +
+                "AND idEstudio = "+ idEs +"\n" +
+                "ORDER by idEstudio", null);
+
+        while (c.moveToNext()) {
+
+            int idAnalisis = c.getInt(0);
+            String fecha = c.getString(1);
+            double valor = c.getDouble(2);
+            String medida = c.getString(3);
+            String estudio = c.getString(4);
+            String observaciones = c.getString(5);
+            int idUsuario = c.getInt(6);
+
+
+
+            AnalisisEstudios aux = new AnalisisEstudios(idAnalisis, fecha, valor, medida, estudio, observaciones, idUsuario);
+            resultado.add(aux);
+        }
+        Close();
+
+        return resultado;
+    }
+    public ArrayList<TipoInsulina> getTiposInsulina()
+    {
+        ArrayList<TipoInsulina> lista = new ArrayList<>();
+
+        Open();
+
+        c=db.rawQuery("SELECT * FROM TiposInsulina", null);
+        while (c.moveToNext())
+        {
+            int idTipoInsulina = c.getInt(0);
+            String tipo = c.getString(1);
+            String info = c.getString(2);
+
+            TipoInsulina tipoInsulina = new TipoInsulina(idTipoInsulina, tipo, info);
+            lista.add(tipoInsulina);
+        }
+        Close();
+
+        return lista;
+    }
+    public Long setDosisDiaria(DosisDiaria dos)
+    {
+
+        Open();
+        ContentValues values = new ContentValues();
+
+        values.put("idTipoIns", dos.getIdTipoIns());
+        values.put("Dosis", dos.getDosis());
+        values.put("idHorario", dos.getIdHorario());
+        values.put("idUsuario", dos.getIdUsuario());
+
+        Long resultante = db.insert("DosisDiaria", "idDosisDiaria", values);
+        Close();
+        return resultante;
+    }
+    public boolean elmDosisDiaria(int idDos)
+    {
+        boolean resultado = false;
+        Open();
+        String[] idDosisDiaria= {String.valueOf(idDos)};
+
+        db.delete("DosisDiaria", "idDosisDiaria=?",idDosisDiaria);
+        Close();
+        resultado = true;
+        return resultado;
+    }
+    public ArrayList<TipoInsulina> getTiposInsulinaDosisDiaria()
+    {
+        ArrayList<TipoInsulina> lista = new ArrayList<>();
+
+        Open();
+
+        c=db.rawQuery("SELECT * \n" +
+                "FROM TiposInsulina\n" +
+                "WHERE idTipo IN(SELECT idTipoIns FROM DosisDiaria)", null);
+        while (c.moveToNext())
+        {
+            int idTipoInsulina = c.getInt(0);
+            String tipo = c.getString(1);
+            String info = c.getString(2);
+
+            TipoInsulina tipoInsulina = new TipoInsulina(idTipoInsulina, tipo, info);
+            lista.add(tipoInsulina);
+        }
+        Close();
+
+        return lista;
+    }
+    public ArrayList<DosisDiariaHorario> getDosisDiaria(int idIns)
+    {
+        ArrayList<DosisDiariaHorario> lista = new ArrayList<>();
+
+        Open();
+
+        c=db.rawQuery("SELECT idDosisDiaria, Tipo, Dosis, Horario, idUsuario\n" +
+                "FROM DosisDiaria dd JOIN TiposInsulina TI on dd.idTipoIns = ti.idTipo\n" +
+                "JOIN Horarios h on dd.idHorario = H.idHorarios\n" +
+                "WHERE idTipoIns = "+ idIns +" ORDER by idHorario ASC;", null);
+        while (c.moveToNext())
+        {
+            int idDosisDiaria = c.getInt(0);
+            String tipoIns = c.getString(1);;
+            int dosis = c.getInt(2);
+            String horario = c.getString(3);
+            int idUsuario = c.getInt(4);
+
+            DosisDiariaHorario dos = new DosisDiariaHorario(idDosisDiaria, tipoIns, dosis, horario, idUsuario);
+            lista.add(dos);
+        }
+        Close();
+
+        return lista;
+    }
+    public Long setDosisCorrectiva(DosisCorr dos)
+    {
+
+        Open();
+        ContentValues values = new ContentValues();
+
+        values.put("Desde", dos.getDesde());
+        values.put("Hasta", dos.getHasta());
+        values.put("Dosis", dos.getDosis());
+        values.put("idTipoIns", dos.getIdTipoIns());
+        values.put("idUsuario", dos.getIdUsuario());
+
+        Long resultante = db.insert("DosisCorr", "idDosisCorr", values);
+        Close();
+        return resultante;
+    }
+    public ArrayList<DosisCorrTipo> getDosisCorr(int idIns)
+    {
+        ArrayList<DosisCorrTipo> lista = new ArrayList<>();
+
+        Open();
+
+        c=db.rawQuery("SELECT idDosisCorr, Desde, Hasta, Dosis, Tipo, idUsuario\n" +
+                "FROM DosisCorr dc JOIN TiposInsulina ti ON dc.idTipoIns = ti.idTipo\n" +
+                "WHERE idTipoIns = "+ idIns +" Order by desde ASC;", null);
+        while (c.moveToNext())
+        {
+            int idDosisCorr = c.getInt(0);
+            int desde = c.getInt(1);
+            int hasta = c.getInt(2);
+            int dosis = c.getInt(3);
+            String tipoIns = c.getString(4);
+            int idUsuario = c.getInt(5);
+
+            DosisCorrTipo dos = new DosisCorrTipo(idDosisCorr, desde, hasta, dosis, tipoIns, idUsuario);
+            lista.add(dos);
+        }
+        Close();
+
+        return lista;
+    }
+    public boolean elmDosisCorr(int idDos)
+    {
+        boolean resultado = false;
+        Open();
+        String[] idDosisCorr= {String.valueOf(idDos)};
+
+        db.delete("DosisCorr", "idDosisCorr=?",idDosisCorr);
+        Close();
+        resultado = true;
+        return resultado;
+    }
+    public ArrayList<TipoInsulina> getTiposInsulinaDosisCorr()
+    {
+        ArrayList<TipoInsulina> lista = new ArrayList<>();
+
+        Open();
+
+        c=db.rawQuery("SELECT * FROM TiposInsulina WHERE idTipo IN(SELECT idTipoIns FROM DosisCorr)", null);
+        while (c.moveToNext())
+        {
+            int idTipoInsulina = c.getInt(0);
+            String tipo = c.getString(1);
+            String info = c.getString(2);
+
+            TipoInsulina tipoInsulina = new TipoInsulina(idTipoInsulina, tipo, info);
+            lista.add(tipoInsulina);
+        }
+        Close();
+
+        return lista;
+    }
+    public int getDosis(int valor)
+    {
+        int dosis = 0;
+        Open();
+        c=db.rawQuery("select Dosis FROM DosisCorr WHERE desde <= "+ valor +" And Hasta >= "+ valor +";", null);
+
+        while (c.moveToNext())
+        {
+            dosis = c.getInt(0);
+        }
+        Close();
+
+        return dosis;
+    }
 
 }
